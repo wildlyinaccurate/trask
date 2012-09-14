@@ -1,0 +1,20 @@
+#!/bin/bash
+
+PIDFILE=".watch.pid"
+
+[ -w . ] || (echo "Unable to write watch.pid" && exit 1)
+
+# Kill off old processes
+while read pid; do
+	kill $pid
+done < $PIDFILE
+
+# Truncate the PID file
+> $PIDFILE
+
+# Store the PID of coffee and sass watch processes
+coffee -o app/js/ -cw src/coffee/ > /dev/null 2>&1 &
+echo $! >> $PIDFILE
+
+eval "sass --watch src/sass:app/css > /dev/null 2>&1 &"
+echo $! >> $PIDFILE
