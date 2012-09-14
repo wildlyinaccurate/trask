@@ -2,6 +2,20 @@
 (function() {
 
   $(function() {
+    $(document).foundationAlerts();
+    $(document).foundationButtons();
+    $(document).foundationAccordion();
+    $(document).foundationNavigation();
+    $(document).foundationCustomForms();
+    $(document).foundationMediaQueryViewer();
+    $(document).foundationTabs({
+      callback: $.foundation.customForms.appendCustomMarkup
+    });
+    $(document).tooltips();
+    return $('input, textarea').placeholder();
+  });
+
+  $(function() {
     ko.bindingHandlers.dblclick = {
       init: function(element, value_accessor) {
         return $(element).dblclick(ko.utils.unwrapObservable(value_accessor()));
