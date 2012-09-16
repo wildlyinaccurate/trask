@@ -32,46 +32,33 @@
     </header>
 
     <div class="row">
-      <section class="four columns">
-        <h2>Lists</h2>
-
-        <ul id="lists" data-bind="foreach: lists.lists">
-          <li></li>
-        </ul>
+      <section id="lists" class="four columns">
+        <dl class="vertical tabs">
+          <dd class="active"><a href="#list1">My First List</a></dd>
+          <dd><a href="#list2">Important Project</a></dd>
+        </dl>
       </section>
 
-      <section id="main" class="eight columns" data-bind="block: todos.tasks_exist">
-        <input id="new-todo" type="text" data-bind="value: header.title, valueUpdate: 'afterkeydown', event: {keyup: header.onAddTodo}" placeholder="What needs to be done?" autofocus>
-        <input id="toggle-all" type="checkbox" data-bind="checked: todos.all_completed">
-        <label for="toggle-all">Mark all as complete</label>
-        <ul id="todo-list" data-bind="foreach: todos.todos">
-          <li data-bind="css: {completed: completed, editing: editing}, visible: visible">
-            <div class="view" data-bind="event: {dblclick: onCheckEditBegin}">
-              <input class="toggle" type="checkbox" data-bind="checked: completed" checked>
-              <label data-bind="text: title"></label>
-              <button class="destroy" data-bind="click: onDestroyTodo"></button>
-            </div>
-            <input class="edit" type="text" data-bind="value: title, selectAndFocus: editing, event: {blur: onCheckEditEnd, keyup: onCheckEditEnd}">
+      <section id="tasks" class="eight columns">
+        <ul class="tabs-content">
+          <li class="active" id="list1Tab">
+            <textarea>
+Sample task
+Another task
+Tasks are separated by newlines
+            </textarea>
+          </li>
+          <li id="list2Tab">
+            <textarea>
+Create models
+Create viewmodels
+Create routers
+Test
+            </textarea>
           </li>
         </ul>
       </section>
     </div>
-
-    <footer id="footer" data-bind="block: todos.tasks_exist">
-      <span id="todo-count" data-bind="html: footer.remaining_text"></span>
-      <ul id="filters">
-        <li>
-          <a href="#/" data-bind="css: {selected: settings.list_filter_mode()==''}">All</a>
-        </li>
-        <li>
-          <a href="#/active" data-bind="css: {selected: settings.list_filter_mode()=='active'}">Active</a>
-        </li>
-        <li>
-          <a href="#/completed" data-bind="css: {selected: settings.list_filter_mode()=='completed'}">Completed</a>
-        </li>
-      </ul>
-      <button id="clear-completed" data-bind="text: footer.clear_text, block: footer.clear_text, click: footer.onDestroyCompleted"></button>
-    </footer>
   </section>
 
   <!-- Depedencies -->
