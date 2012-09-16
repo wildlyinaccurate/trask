@@ -28,10 +28,12 @@ $ ->
 	window.app = {viewmodels: {}, collections: {}}
 	app.viewmodels.settings = new SettingsViewModel()
 	app.collections.todos = new TodoCollection()
+	app.collections.lists = new ListCollection()
 	app.viewmodels.header = new HeaderViewModel(app.collections.todos)
 	app.viewmodels.todos = new TodosViewModel(app.collections.todos)
+	app.viewmodels.lists = new ListsViewModel(app.collections.lists)
 	app.viewmodels.footer = new FooterViewModel(app.collections.todos)
-	ko.applyBindings(app.viewmodels, $('#todoapp')[0])
+	ko.applyBindings(app.viewmodels, $('#trask')[0])
 
 	# Start the app routing
 	new AppRouter()

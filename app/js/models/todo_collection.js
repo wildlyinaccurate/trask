@@ -11,7 +11,7 @@
       return TodoCollection.__super__.constructor.apply(this, arguments);
     }
 
-    TodoCollection.prototype.localStorage = new Store('todos-knockback');
+    TodoCollection.prototype.localStorage = new Store('trask');
 
     TodoCollection.prototype.model = Todo;
 
