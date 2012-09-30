@@ -5,3 +5,11 @@ body {
 .container {
 	background-color: rgba(0, 0, 0, 0.15);
 }
+
+ul.tasks {
+	margin: 0;
+}
+
+.tasks li {
+	list-style: none;
+}

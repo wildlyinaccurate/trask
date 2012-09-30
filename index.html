@@ -32,29 +32,30 @@
     </header>
 
     <div class="container row">
-      <section id="lists" class="four columns">
+      <section class="four columns">
+        <h3>Your Lists</h3>
+
         <dl class="vertical tabs">
-          <dd class="active"><a href="#list1">My First List</a></dd>
-          <dd><a href="#list2">Important Project</a></dd>
+          <!-- ko foreach: lists.lists -->
+          <dd><a data-bind="text: title, attr: { href: '#' + slug() }"></a></dd>
+          <!-- /ko -->
+
+          <dd><input type="text" autocomplete="off" placeholder="Create a trask list" data-bind="value: lists.title, event: { keyup: lists.createList }" /></dd>
         </dl>
       </section>
 
-      <section id="tasks" class="eight columns">
-        <ul class="tabs-content">
-          <li class="active" id="list1Tab">
-            <textarea>
-Sample task
-Another task
-Tasks are separated by newlines
-            </textarea>
-          </li>
-          <li id="list2Tab">
-            <textarea>
-Create models
-Create viewmodels
-Create routers
-Test
-            </textarea>
+      <section class="eight columns">
+        <ul class="tabs-content" data-bind="foreach: lists.lists">
+          <li data-bind="attr: { id: slug() + 'Tab' }">
+            <h3 data-bind="text: title"></h3>
+
+            <ul class="tasks">
+              <!-- ko foreach: tasks -->
+              <li data-bind="text: title"></li>
+              <!-- /ko -->
+
+              <li><input type="text" autocomplete="off" data-bind="value: newTaskTitle, event: { keyup: createTask }" /></li>
+            </ul>
           </li>
         </ul>
       </section>
@@ -88,16 +89,16 @@ Test
   <script src="app/js/lib/foundation/jquery.placeholder.js"></script>
 
   <!-- App -->
-  <script src="app/js/models/todo.js"></script>
-  <script src="app/js/models/todo_collection.js"></script>
+  <script src="app/js/lib/trask_storage.js"></script>
+
+  <script src="app/js/models/task.js"></script>
+  <script src="app/js/models/task_collection.js"></script>
   <script src="app/js/models/list.js"></script>
   <script src="app/js/models/list_collection.js"></script>
 
-  <script src="app/js/viewmodels/settings.js"></script>
-  <script src="app/js/viewmodels/header.js"></script>
+  <script src="app/js/viewmodels/tasks.js"></script>
   <script src="app/js/viewmodels/lists.js"></script>
-  <script src="app/js/viewmodels/todos.js"></script>
-  <script src="app/js/viewmodels/footer.js"></script>
+  <script src="app/js/viewmodels/settings.js"></script>
 
   <script src="app/js/routers/app.js"></script>
 

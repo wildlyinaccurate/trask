@@ -3,15 +3,15 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  window.Todo = (function(_super) {
+  window.Task = (function(_super) {
 
-    __extends(Todo, _super);
+    __extends(Task, _super);
 
-    function Todo() {
-      return Todo.__super__.constructor.apply(this, arguments);
+    function Task() {
+      return Task.__super__.constructor.apply(this, arguments);
     }
 
-    Todo.prototype.completed = function(completed) {
+    Task.prototype.completed = function(completed) {
       if (arguments.length === 0) {
         return !!this.get('completed');
       }
@@ -20,7 +20,7 @@
       });
     };
 
-    return Todo;
+    return Task;
 
   })(Backbone.Model);
 

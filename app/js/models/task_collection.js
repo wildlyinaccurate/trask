@@ -3,24 +3,20 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  window.AppRouter = (function(_super) {
+  window.TaskCollection = (function(_super) {
 
-    __extends(AppRouter, _super);
+    __extends(TaskCollection, _super);
 
-    function AppRouter() {
-      return AppRouter.__super__.constructor.apply(this, arguments);
+    function TaskCollection() {
+      return TaskCollection.__super__.constructor.apply(this, arguments);
     }
 
-    AppRouter.prototype.routes = {
-      '': 'all'
-    };
+    TaskCollection.prototype.model = Task;
 
-    AppRouter.prototype.all = function() {
-      return trask.viewmodels.settings.list_filter_mode('');
-    };
+    TaskCollection.prototype.localStorage = new TraskStorage('tasks');
 
-    return AppRouter;
+    return TaskCollection;
 
-  })(Backbone.Router);
+  })(Backbone.Collection);
 
 }).call(this);

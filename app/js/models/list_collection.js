@@ -11,9 +11,9 @@
       return ListCollection.__super__.constructor.apply(this, arguments);
     }
 
-    ListCollection.prototype.localStorage = new Store('trask');
-
     ListCollection.prototype.model = List;
+
+    ListCollection.prototype.localStorage = new TraskStorage('lists');
 
     return ListCollection;
 

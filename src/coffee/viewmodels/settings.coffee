@@ -1,3 +1,3 @@
-window.SettingsViewModel =  ->
-	@list_filter_mode = ko.observable('')
-	@
+window.SettingsViewModel = ->
+  @list_filter_mode = ko.observable('')
+  @

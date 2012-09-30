@@ -4,26 +4,6 @@
 
   ListViewModel = function(model) {
     var _this = this;
-    this.editing = ko.observable(false);
-    this.completed = kb.observable(model, {
-      key: 'completed',
-      read: (function() {
-        return model.completed();
-      }),
-      write: (function(completed) {
-        return model.completed(completed);
-      })
-    }, this);
-    this.visible = ko.computed(function() {
-      switch (app.viewmodels.settings.list_filter_mode()) {
-        case 'active':
-          return !_this.completed();
-        case 'completed':
-          return _this.completed();
-        default:
-          return true;
-      }
-    });
     this.title = kb.observable(model, {
       key: 'title',
       write: (function(title) {
@@ -39,32 +19,41 @@
         return _this.editing(false);
       })
     }, this);
-    this.onDestroyTodo = function() {
-      return model.destroy();
-    };
-    this.onCheckEditBegin = function() {
-      if (!_this.editing() && !_this.completed()) {
-        _this.editing(true);
-        return $('.todo-input').focus();
+    this.newTaskTitle = ko.observable('');
+    this.tasks = new kb.collectionObservable(new TaskCollection());
+    this.createTask = function(view_model, event) {
+      if (!$.trim(_this.newTaskTitle()) || (event.keyCode !== trask.ENTER_KEY)) {
+        return true;
       }
+      _this.tasks.collection().create({
+        title: $.trim(_this.newTaskTitle())
+      });
+      return _this.newTaskTitle('');
     };
-    this.onCheckEditEnd = function(view_model, event) {
-      if ((event.keyCode === 13) || (event.type === 'blur')) {
-        $('.todo-input').blur();
-        return _this.editing(false);
-      }
-    };
+    this.slug = ko.computed(function() {
+      return _this.title().toLowerCase().replace(/\ /g, '-').replace(/[^\w-]+/g, '');
+    });
     return this;
   };
 
   window.ListsViewModel = function(lists) {
     var _this = this;
+    this.title = ko.observable('');
     this.lists = kb.collectionObservable(lists, {
       view_model: ListViewModel
     });
     this.lists.collection().bind('change', function() {
       return _this.lists.valueHasMutated();
     });
+    this.createList = function(view_model, event) {
+      if (!$.trim(_this.title()) || (event.keyCode !== trask.ENTER_KEY)) {
+        return true;
+      }
+      lists.create({
+        title: $.trim(_this.title())
+      });
+      return _this.title('');
+    };
     return this;
   };
 
