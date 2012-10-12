@@ -22,6 +22,8 @@
 
     return Task;
 
-  })(Backbone.Model);
+  })(Backbone.RelationalModel);
+
+  Task.setup();
 
 }).call(this);

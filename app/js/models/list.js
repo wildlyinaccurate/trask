@@ -11,8 +11,21 @@
       return List.__super__.constructor.apply(this, arguments);
     }
 
+    List.prototype.relations = [
+      {
+        type: Backbone.HasMany,
+        key: 'tasks',
+        relatedModel: 'Task',
+        reverseRelation: {
+          key: 'belongsTo'
+        }
+      }
+    ];
+
     return List;
 
-  })(Backbone.Model);
+  })(Backbone.RelationalModel);
+
+  List.setup();
 
 }).call(this);
