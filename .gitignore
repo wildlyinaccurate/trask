@@ -1,2 +1,4 @@
 .watch.pid
 .sass-cache
+coffee-compile.log
+sass-compile.log
