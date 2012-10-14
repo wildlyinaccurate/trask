@@ -3,7 +3,7 @@ TaskViewModel = (model) ->
   @editing = ko.observable(false)
   @completed = kb.observable(model, {key: 'completed', read: (-> return model.completed()), write: ((completed) -> model.completed(completed)) }, @)
   @visible = ko.computed(=>
-    switch trask.viewmodels.settings.list_filter_mode()
+    switch Trask.ViewModels.Settings.list_filter_mode()
       when 'active' then return not @completed()
       when 'completed' then return @completed()
       else return true

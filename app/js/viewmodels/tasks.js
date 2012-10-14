@@ -15,7 +15,7 @@
       })
     }, this);
     this.visible = ko.computed(function() {
-      switch (trask.viewmodels.settings.list_filter_mode()) {
+      switch (Trask.ViewModels.Settings.list_filter_mode()) {
         case 'active':
           return !_this.completed();
         case 'completed':

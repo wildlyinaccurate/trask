@@ -12,7 +12,7 @@ ListViewModel = (model) ->
   @tasks = kb.collectionObservable(model.get('tasks'))
 
   @createTask = (view_model, event) =>
-    return true if not $.trim(@newTaskTitle()) or (event.keyCode != trask.ENTER_KEY)
+    return if not $.trim(@newTaskTitle()) or event.keyCode != Trask.Keyboard.ENTER
 
     newTask = @tasks.collection().create({
       title: $.trim(@newTaskTitle())
@@ -44,7 +44,7 @@ window.ListsViewModel = (lists) ->
   @lists.collection().bind('change', => @lists.valueHasMutated())
 
   @createList = (view_model, event) =>
-    return true if not $.trim(@title()) or (event.keyCode != trask.ENTER_KEY)
+    return true if not $.trim(@title()) or (event.keyCode != Trask.Keyboard.ENTER)
 
     lists.create({
       title: $.trim(@title())

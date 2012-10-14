@@ -1,23 +1,14 @@
 # Start Trask
 $ ->
-  window.trask = {
-    viewmodels: {},
-    collections: {}
-  }
+  Trask.Collections.Lists = new ListCollection()
+  Trask.Collections.Lists.fetch()
 
-  # TODO: Find somewhere meaningful to put this
-  trask.ENTER_KEY = 13
+  Trask.ViewModels.Lists = new ListsViewModel(Trask.Collections.Lists)
+  Trask.ViewModels.Settings = new SettingsViewModel()
 
-  trask.collections.lists = new ListCollection()
-  trask.collections.lists.fetch()
+  ko.applyBindings(Trask.ViewModels, $('#trask')[0])
 
-  trask.viewmodels.lists = new ListsViewModel(trask.collections.lists)
-  trask.viewmodels.settings = new SettingsViewModel()
-
-
-  ko.applyBindings(trask.viewmodels, $('#trask')[0])
-
-  new AppRouter()
+  Trask.Router = new AppRouter()
   Backbone.history.start()
 
 

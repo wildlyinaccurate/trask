@@ -13,7 +13,7 @@
 
     TaskCollection.prototype.model = Task;
 
-    TaskCollection.prototype.localStorage = new TraskStorage('tasks');
+    TaskCollection.prototype.localStorage = new Trask.Storage('tasks');
 
     return TaskCollection;
 

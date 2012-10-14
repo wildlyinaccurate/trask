@@ -23,8 +23,8 @@
     this.tasks = kb.collectionObservable(model.get('tasks'));
     this.createTask = function(view_model, event) {
       var newTask;
-      if (!$.trim(_this.newTaskTitle()) || (event.keyCode !== trask.ENTER_KEY)) {
-        return true;
+      if (!$.trim(_this.newTaskTitle()) || event.keyCode !== Trask.Keyboard.ENTER) {
+        return;
       }
       newTask = _this.tasks.collection().create({
         title: $.trim(_this.newTaskTitle()),
@@ -50,7 +50,7 @@
       return _this.lists.valueHasMutated();
     });
     this.createList = function(view_model, event) {
-      if (!$.trim(_this.title()) || (event.keyCode !== trask.ENTER_KEY)) {
+      if (!$.trim(_this.title()) || (event.keyCode !== Trask.Keyboard.ENTER)) {
         return true;
       }
       lists.create({

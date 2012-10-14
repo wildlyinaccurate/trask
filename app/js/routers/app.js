@@ -12,11 +12,11 @@
     }
 
     AppRouter.prototype.routes = {
-      '': 'all'
+      '*actions': 'defaultRoute'
     };
 
-    AppRouter.prototype.all = function() {
-      return trask.viewmodels.settings.list_filter_mode('');
+    AppRouter.prototype.defaultRoute = function(action) {
+      return Trask.ViewModels.Settings.list_filter_mode('');
     };
 
     return AppRouter;

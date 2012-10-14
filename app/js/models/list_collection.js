@@ -13,7 +13,7 @@
 
     ListCollection.prototype.model = List;
 
-    ListCollection.prototype.localStorage = new TraskStorage('lists');
+    ListCollection.prototype.localStorage = new Trask.Storage('lists');
 
     return ListCollection;
 

@@ -38,16 +38,16 @@
         <h3>Your Lists</h3>
 
         <dl class="vertical tabs">
-          <!-- ko foreach: lists.lists -->
+          <!-- ko foreach: Lists.lists -->
           <dd data-bind="css: { active: $index() == 0 }"><a data-bind="text: title, attr: { href: '#' + slug() }"></a></dd>
           <!-- /ko -->
 
-          <dd><input type="text" autocomplete="off" placeholder="Create a new trask list" data-bind="value: lists.title, event: { keyup: lists.createList }" /></dd>
+          <dd><input type="text" autocomplete="off" placeholder="Create a new trask list" data-bind="value: Lists.title, event: { keyup: Lists.createList }" /></dd>
         </dl>
       </section>
 
       <section class="eight columns">
-        <ul class="tabs-content" data-bind="foreach: lists.lists">
+        <ul class="tabs-content" data-bind="foreach: Lists.lists">
           <li data-bind="css : { active: $index() == 0 }, attr: { id: slug() + 'Tab' }">
             <h3 data-bind="text: title"></h3>
 
@@ -91,7 +91,9 @@
   <script src="app/js/lib/foundation/jquery.placeholder.js"></script>
 
   <!-- App -->
+  <script src="app/js/trask.js"></script>
   <script src="app/js/lib/trask/storage.js"></script>
+  <script src="app/js/lib/trask/keyboard.js"></script>
 
   <script src="app/js/models/task.js"></script>
   <script src="app/js/models/task_collection.js"></script>

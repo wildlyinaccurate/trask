@@ -2,17 +2,12 @@
 (function() {
 
   $(function() {
-    window.trask = {
-      viewmodels: {},
-      collections: {}
-    };
-    trask.ENTER_KEY = 13;
-    trask.collections.lists = new ListCollection();
-    trask.collections.lists.fetch();
-    trask.viewmodels.lists = new ListsViewModel(trask.collections.lists);
-    trask.viewmodels.settings = new SettingsViewModel();
-    ko.applyBindings(trask.viewmodels, $('#trask')[0]);
-    new AppRouter();
+    Trask.Collections.Lists = new ListCollection();
+    Trask.Collections.Lists.fetch();
+    Trask.ViewModels.Lists = new ListsViewModel(Trask.Collections.Lists);
+    Trask.ViewModels.Settings = new SettingsViewModel();
+    ko.applyBindings(Trask.ViewModels, $('#trask')[0]);
+    Trask.Router = new AppRouter();
     return Backbone.history.start();
   });
 

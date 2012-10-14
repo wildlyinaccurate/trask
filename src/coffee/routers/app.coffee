@@ -1,5 +1,6 @@
 class window.AppRouter extends Backbone.Router
   routes:
-    '': 'all'
+    '*actions': 'defaultRoute'
 
-  all: -> trask.viewmodels.settings.list_filter_mode('')
+  defaultRoute: (action) ->
+    Trask.ViewModels.Settings.list_filter_mode('')
