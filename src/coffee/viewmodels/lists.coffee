@@ -13,12 +13,11 @@ ListViewModel = (model) ->
   @tasks = kb.collectionObservable(model.get('tasks'))
 
   @editBegin = =>
-    $('input').focus()
     @editing(true)
+    $('input.edit').focus()
 
-  @editEnd = =>
-    return if event.keyCode != Trask.Keyboard.ENTER
-    @editing(false)
+  @editEnd = (view_model, event) =>
+    @editing(false) if event.keyCode == Trask.Keyboard.ENTER or event.type == 'blur'
 
   @createTask = (view_model, event) =>
     return if not $.trim(@newTaskTitle()) or event.keyCode != Trask.Keyboard.ENTER

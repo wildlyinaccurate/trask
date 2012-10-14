@@ -23,14 +23,13 @@
     }, this);
     this.tasks = kb.collectionObservable(model.get('tasks'));
     this.editBegin = function() {
-      $('input').focus();
-      return _this.editing(true);
+      _this.editing(true);
+      return $('input.edit').focus();
     };
-    this.editEnd = function() {
-      if (event.keyCode !== Trask.Keyboard.ENTER) {
-        return;
+    this.editEnd = function(view_model, event) {
+      if (event.keyCode === Trask.Keyboard.ENTER || event.type === 'blur') {
+        return _this.editing(false);
       }
-      return _this.editing(false);
     };
     this.createTask = function(view_model, event) {
       var newTask;
