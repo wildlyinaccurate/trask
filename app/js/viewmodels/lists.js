@@ -4,6 +4,7 @@
 
   ListViewModel = function(model) {
     var _this = this;
+    this.newTaskTitle = ko.observable('');
     this.title = kb.observable(model, {
       key: 'title',
       write: (function(title) {
@@ -19,15 +20,18 @@
         return _this.editing(false);
       })
     }, this);
-    this.newTaskTitle = ko.observable('');
-    this.tasks = new kb.collectionObservable(new TaskCollection());
+    this.tasks = kb.collectionObservable(model.get('tasks'));
     this.createTask = function(view_model, event) {
+      var newTask;
       if (!$.trim(_this.newTaskTitle()) || (event.keyCode !== trask.ENTER_KEY)) {
         return true;
       }
-      _this.tasks.collection().create({
-        title: $.trim(_this.newTaskTitle())
+      newTask = _this.tasks.collection().create({
+        title: $.trim(_this.newTaskTitle()),
+        belongsTo: model.get('id')
       });
+      model.get('tasks').add(newTask);
+      Backbone.sync('update', model);
       return _this.newTaskTitle('');
     };
     this.slug = ko.computed(function() {
@@ -50,7 +54,8 @@
         return true;
       }
       lists.create({
-        title: $.trim(_this.title())
+        title: $.trim(_this.title()),
+        tasks: new TaskCollection()
       });
       return _this.title('');
     };

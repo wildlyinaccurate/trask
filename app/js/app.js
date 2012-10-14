@@ -8,12 +8,12 @@
     };
     trask.ENTER_KEY = 13;
     trask.collections.lists = new ListCollection();
+    trask.collections.lists.fetch();
     trask.viewmodels.lists = new ListsViewModel(trask.collections.lists);
     trask.viewmodels.settings = new SettingsViewModel();
     ko.applyBindings(trask.viewmodels, $('#trask')[0]);
     new AppRouter();
-    Backbone.history.start();
-    return trask.collections.lists.fetch();
+    return Backbone.history.start();
   });
 
   $(function() {

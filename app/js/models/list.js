@@ -16,11 +16,18 @@
         type: Backbone.HasMany,
         key: 'tasks',
         relatedModel: 'Task',
+        collectionType: 'TaskCollection',
         reverseRelation: {
           key: 'belongsTo'
         }
       }
     ];
+
+    List.prototype.defaults = function() {
+      return {
+        created_at: new Date()
+      };
+    };
 
     return List;
 

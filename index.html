@@ -39,21 +39,21 @@
 
         <dl class="vertical tabs">
           <!-- ko foreach: lists.lists -->
-          <dd><a data-bind="text: title, attr: { href: '#' + slug() }"></a></dd>
+          <dd data-bind="css: { active: $index() == 0 }"><a data-bind="text: title, attr: { href: '#' + slug() }"></a></dd>
           <!-- /ko -->
 
-          <dd><input type="text" autocomplete="off" placeholder="Create a trask list" data-bind="value: lists.title, event: { keyup: lists.createList }" /></dd>
+          <dd><input type="text" autocomplete="off" placeholder="Create a new trask list" data-bind="value: lists.title, event: { keyup: lists.createList }" /></dd>
         </dl>
       </section>
 
       <section class="eight columns">
         <ul class="tabs-content" data-bind="foreach: lists.lists">
-          <li data-bind="attr: { id: slug() + 'Tab' }">
+          <li data-bind="css : { active: $index() == 0 }, attr: { id: slug() + 'Tab' }">
             <h3 data-bind="text: title"></h3>
 
             <ul class="tasks">
               <!-- ko foreach: tasks -->
-              <li data-bind="text: title"></li>
+              <li class="task"><input type="text" autocomplete="off" data-bind="value: title" /></li>
               <!-- /ko -->
 
               <li><input type="text" autocomplete="off" data-bind="value: newTaskTitle, event: { keyup: createTask }" /></li>

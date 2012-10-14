@@ -1,4 +1,6 @@
 ListViewModel = (model) ->
+  @newTaskTitle = ko.observable('')
+
   @title = kb.observable(model, {
     key: 'title'
     write: ((title) =>
@@ -7,14 +9,20 @@ ListViewModel = (model) ->
     )
   }, @)
 
-  @newTaskTitle = ko.observable('')
-
-  @tasks = new kb.collectionObservable(new TaskCollection())
+  @tasks = kb.collectionObservable(model.get('tasks'))
 
   @createTask = (view_model, event) =>
     return true if not $.trim(@newTaskTitle()) or (event.keyCode != trask.ENTER_KEY)
 
-    @tasks.collection().create({title: $.trim(@newTaskTitle())})
+    newTask = @tasks.collection().create({
+      title: $.trim(@newTaskTitle())
+      belongsTo: model.get('id')
+    })
+
+    model.get('tasks').add(newTask)
+
+    Backbone.sync('update', model)
+
     @newTaskTitle('')
 
 
@@ -29,13 +37,20 @@ ListViewModel = (model) ->
 window.ListsViewModel = (lists) ->
   @title = ko.observable('')
 
-  @lists = kb.collectionObservable(lists, {view_model: ListViewModel})
+  @lists = kb.collectionObservable(lists, {
+    view_model: ListViewModel
+  })
+
   @lists.collection().bind('change', => @lists.valueHasMutated())
 
   @createList = (view_model, event) =>
     return true if not $.trim(@title()) or (event.keyCode != trask.ENTER_KEY)
 
-    lists.create({title: $.trim(@title())})
+    lists.create({
+      title: $.trim(@title())
+      tasks: new TaskCollection()
+    })
+
     @title('')
 
   @
