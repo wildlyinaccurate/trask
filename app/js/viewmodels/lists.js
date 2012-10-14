@@ -4,6 +4,7 @@
 
   ListViewModel = function(model) {
     var _this = this;
+    this.editing = ko.observable(false);
     this.newTaskTitle = ko.observable('');
     this.title = kb.observable(model, {
       key: 'title',
@@ -21,6 +22,16 @@
       })
     }, this);
     this.tasks = kb.collectionObservable(model.get('tasks'));
+    this.editBegin = function() {
+      $('input').focus();
+      return _this.editing(true);
+    };
+    this.editEnd = function() {
+      if (event.keyCode !== Trask.Keyboard.ENTER) {
+        return;
+      }
+      return _this.editing(false);
+    };
     this.createTask = function(view_model, event) {
       var newTask;
       if (!$.trim(_this.newTaskTitle()) || event.keyCode !== Trask.Keyboard.ENTER) {
@@ -31,8 +42,11 @@
         belongsTo: model.get('id')
       });
       model.get('tasks').add(newTask);
-      Backbone.sync('update', model);
-      return _this.newTaskTitle('');
+      return Backbone.sync('update', model, {
+        success: function() {
+          return _this.newTaskTitle('');
+        }
+      });
     };
     this.slug = ko.computed(function() {
       return _this.title().toLowerCase().replace(/\ /g, '-').replace(/[^\w-]+/g, '');

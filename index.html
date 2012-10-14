@@ -39,7 +39,10 @@
 
         <dl class="vertical tabs">
           <!-- ko foreach: Lists.lists -->
-          <dd data-bind="css: { active: $index() == 0 }"><a data-bind="text: title, attr: { href: '#' + slug() }"></a></dd>
+          <dd data-bind="css: { active: $index() == 0 }, event: { dblclick: editBegin }">
+            <a data-bind="text: title, attr: { href: '#' + slug() }, visible: ! editing()"></a>
+            <input type="text" data-bind="visible: editing, value: title, selectAndFocus: editing, event: { blur: editEnd, keyup: editEnd }">
+          </dd>
           <!-- /ko -->
 
           <dd><input type="text" autocomplete="off" placeholder="Create a new trask list" data-bind="value: Lists.title, event: { keyup: Lists.createList }" /></dd>

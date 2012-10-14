@@ -1,4 +1,5 @@
 ListViewModel = (model) ->
+  @editing = ko.observable(false)
   @newTaskTitle = ko.observable('')
 
   @title = kb.observable(model, {
@@ -11,6 +12,14 @@ ListViewModel = (model) ->
 
   @tasks = kb.collectionObservable(model.get('tasks'))
 
+  @editBegin = =>
+    $('input').focus()
+    @editing(true)
+
+  @editEnd = =>
+    return if event.keyCode != Trask.Keyboard.ENTER
+    @editing(false)
+
   @createTask = (view_model, event) =>
     return if not $.trim(@newTaskTitle()) or event.keyCode != Trask.Keyboard.ENTER
 
@@ -21,10 +30,9 @@ ListViewModel = (model) ->
 
     model.get('tasks').add(newTask)
 
-    Backbone.sync('update', model)
-
-    @newTaskTitle('')
-
+    Backbone.sync('update', model, {
+      success: => @newTaskTitle('')
+    })
 
   @slug = ko.computed(=>
     @title().toLowerCase()
