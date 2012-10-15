@@ -2,7 +2,7 @@
 
 PIDFILE=".watch.pid"
 
-[ -w . ] || (echo "Unable to write watch.pid" && exit 1)
+touch $PIDFILE || (echo "Unable to write to .watch.pid" && exit 1)
 
 # Kill off old processes
 while read pid; do
