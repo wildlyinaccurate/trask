@@ -100,7 +100,7 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
     };
   }
 
-  var resp;
+  var resp, syncDfd = $.Deferred && $.Deferred(); //If $ is having Deferred - use it.
 
   switch (method) {
     case "read":    resp = model.id != undefined ? store.find(model) : store.findAll(); break;
@@ -111,26 +111,30 @@ Backbone.LocalStorage.sync = window.Store.sync = Backbone.localSync = function(m
 
   if (resp) {
     options.success(resp);
+    if (syncDfd) syncDfd.resolve();
   } else {
     options.error("Record not found");
+    if (syncDfd) syncDfd.reject();
   }
+
+  return syncDfd && syncDfd.promise();
 };
 
 Backbone.ajaxSync = Backbone.sync;
 
 Backbone.getSyncMethod = function(model) {
-	if(model.localStorage || (model.collection && model.collection.localStorage))
-	{
-		return Backbone.localSync;
-	}
+  if(model.localStorage || (model.collection && model.collection.localStorage))
+  {
+    return Backbone.localSync;
+  }
 
-	return Backbone.ajaxSync;
+  return Backbone.ajaxSync;
 };
 
 // Override 'Backbone.sync' to default to localSync,
 // the original 'Backbone.sync' is still available in 'Backbone.ajaxSync'
 Backbone.sync = function(method, model, options, error) {
-	return Backbone.getSyncMethod(model).apply(this, [method, model, options, error]);
+  return Backbone.getSyncMethod(model).apply(this, [method, model, options, error]);
 };
 
 })();
