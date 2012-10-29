@@ -11,6 +11,12 @@
       return Task.__super__.constructor.apply(this, arguments);
     }
 
+    Task.prototype.defaults = function() {
+      return {
+        created_at: new Date()
+      };
+    };
+
     Task.prototype.completed = function(completed) {
       if (arguments.length === 0) {
         return !!this.get('completed');
