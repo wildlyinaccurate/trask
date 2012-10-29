@@ -1,3 +1,3 @@
-class Trask.Storage
+class Trask.Storage extends Store
   constructor: (storageKey) ->
-    return new Store('trask-' + storageKey)
+    return super('trask-' + storageKey)
