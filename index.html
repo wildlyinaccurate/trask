@@ -41,7 +41,7 @@
           <!-- ko foreach: Lists.lists -->
           <dd data-bind="css: { active: $index() == 0 }, event: { dblclick: editBegin }">
             <a data-bind="text: title, attr: { href: '#' + slug() }, visible: ! editing()"></a>
-            <input class="edit" type="text" data-bind="visible: editing, value: title, selectAndFocus: editing, event: { blur: editEnd, keyup: editEnd }">
+            <input class="edit" type="text" data-bind="visible: editing, value: title, event: { blur: editEnd, keyup: editEnd }">
           </dd>
           <!-- /ko -->
 
@@ -56,7 +56,7 @@
 
             <ul class="tasks">
               <!-- ko foreach: tasks -->
-              <li class="task"><input type="text" autocomplete="off" data-bind="value: title" /></li>
+              <li class="task"><input type="text" autocomplete="off" data-bind="value: title, selectAndFocus: editing, event: { blur: editEnd, keyup: editEnd }" /></li>
               <!-- /ko -->
 
               <li><input type="text" autocomplete="off" placeholder="Add a new task" data-bind="value: newTaskTitle, event: { keyup: createTask }" /></li>
