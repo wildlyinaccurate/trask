@@ -10,7 +10,9 @@ ListViewModel = (model) ->
     )
   }, @)
 
-  @tasks = kb.collectionObservable(model.get('tasks'))
+  @tasks = kb.collectionObservable(model.get('tasks'), {
+    view_model: TaskViewModel
+  })
 
   @editBegin = =>
     @editing(true)

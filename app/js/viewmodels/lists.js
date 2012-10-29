@@ -21,7 +21,9 @@
         return _this.editing(false);
       })
     }, this);
-    this.tasks = kb.collectionObservable(model.get('tasks'));
+    this.tasks = kb.collectionObservable(model.get('tasks'), {
+      view_model: TaskViewModel
+    });
     this.editBegin = function() {
       _this.editing(true);
       return $('input.edit').focus();
