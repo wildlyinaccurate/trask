@@ -16,5 +16,5 @@ done < $PIDFILE
 coffee -o app/js/ -cw src/coffee/ > ./coffee-compile.log 2>&1 &
 echo $! >> $PIDFILE
 
-eval "sass --watch src/sass:app/css > ./sass-compile.log 2>&1 &"
+sass --watch src/sass:app/css > ./sass-compile.log 2>&1 &
 echo $! >> $PIDFILE
