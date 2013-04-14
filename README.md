@@ -2,6 +2,8 @@
 
 Trask is a keyboard-centric task tracking tool designed to help you manage your day-to-day work.
 
+### 14 April 2013 - Trask is no longer maintained.
+
 ## Contributing
 
 Trask is built on [Knockback.js](http://kmalakoff.github.com/knockback/) and written in [CoffeeScript](http://coffeescript.org/). The stylesheets are written in [SCSS](http://sass-lang.com/).
